@@ -14,5 +14,14 @@ jobs:
       - run: echo "🐧 This markus-job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - run: echo "XXXXXXXXX"
-      - run: echo "owner= ${{ context.repo.owner }}"
+      - name: Send a hello world
+        uses: actions/github-script@v4.0.2
+        with:
+          script: |
+            github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Hello World!",
+              body: "Hello from GitHub Actions!"
+            });
       
